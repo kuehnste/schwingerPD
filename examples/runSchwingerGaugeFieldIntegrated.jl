@@ -52,7 +52,7 @@ let
         count += 1
     end
     # Save the results to a file
-    fname = string("schwinger_gauge_field_integrated_N", N, "_x", x, "_mg", mg, "_lambda", lambda, ".txt")
+    fname = string("schwinger_gauge_field_integrated_N", N, "_x", x, "_mg", mg, "_eta", eta, ".txt")
     open(fname, "w") do io
         writedlm(io, results)
     end
