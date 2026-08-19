@@ -20,7 +20,7 @@ let
     # Inverse lattice spacing squared in units of the coupling
     x = 1.0
     # Mass in units of the coupling
-    mg = 0.5
+    mg = 0.05
     # Maximum background electric field
     l0max = 2.0
     # Strength of the penalty term
