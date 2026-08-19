@@ -46,7 +46,7 @@ let
         ChargePenaltyMPO = getChargePenaltyMPO(s)
         P = inner(gs', ChargePenaltyMPO, gs)
         if abs(P)>1E-10
-            @warn string("Total charge has a vlalue of ", P)
+            @warn string("Penalty enforcing vanishing total charge has a value of ", P)
         end
         results[count, :] .= [l0; energy; Lvals]
         count += 1
