@@ -16,6 +16,8 @@ let
     N = 20
     # The number of steps we take scan the background field
     nsteps = 20
+    # The number of sweeps we do for computing the ground state
+    nsweeps = 200
 
     # Inverse lattice spacing squared in units of the coupling
     x = 1.0
@@ -26,9 +28,9 @@ let
     # Maximum background electric field
     l0max = 2.0
     # Strength of the penalty term enforcing vanishing total charge
-    lambda = 100.0
-    # Strength of the penalty term enforcing Gauss law
     eta = 100.0
+    # Strength of the penalty term enforcing Gauss law
+    lambda = 100.0
 
     # Convert x and m/g in the corresponding parameters needed for the Schwinger Hamiltonian
     J = x
@@ -42,11 +44,7 @@ let
     Lvals = zeros(N-1)
     for l0 in 0:dl0:l0max
         println("--> Working on l0 = ", l0)
-        energy, gs, s = runSchwingerDMRG(N, d, J, mu, l0, epsilon, lambda, eta)
-        # Compute the expected value of Pauli-Z everywhere
-        Zvals = expect(gs, "Z", sites=1:2:(2*N-1))
-        # Get the electric field
-        Lvals = getElectricField(Zvals)
+        energy, gs, s = runSchwingerDMRG(N, d, J, mu, l0, epsilon, lambda, eta, nsweeps)
         # Compute the expected value for the penalty enforcing vanishing total charge and check if we have vanishing total charge
         ChargePenaltyMPO = getChargePenaltyMPO(s)
         P = inner(gs', ChargePenaltyMPO, gs)
@@ -59,10 +57,9 @@ let
         if abs(P)>1E-10
             @warn string("Penalty enforcing Gauss law has a value of ", P)
         end
-        # for n=1:(N-1)
-        #     LMPO = getLMPO(n, s)
-        #     Lvals = real(inner(gs', LMPO, gs))
-        # end
+        # Compute the expected value of Pauli-Z everywhere
+        Zvals = expect(gs, "Z", sites=1:2:(2*N-1))
+        # Get the electric field
         Lvals = expect(gs, "L", sites=2:2:(2*N-1))
         results[count, :] .= [l0; energy; Lvals]
         count += 1
