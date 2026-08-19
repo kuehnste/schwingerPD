@@ -41,7 +41,6 @@ let
     # Run the calculation
     count = 1
     results = zeros(nsteps, N+1)
-    Lvals = zeros(N-1)
     for l0 in 0:dl0:l0max
         println("--> Working on l0 = ", l0)
         energy, gs, s = runSchwingerDMRG(N, d, J, mu, l0, epsilon, lambda, eta, nsweeps)
