@@ -44,7 +44,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## References
 
-There is a vast amount of literature on MPS and more general tensor network methods available. The following incomplete list of reviews and references therein might provide a useful starting point for learning more about MPS and more general tensor networks.
+The following list provides some references on the Schwinger model and Tensor Network approaches to the lattice formulation in the presence of a topological term.
 
 * S. Coleman, [Ann. Phys. 101, 239–267 (1976)](https://doi.org/10.1016/0003-4916(76)90280-3)
 * C. J. Hamer, Z. Weihong, and J. Oitmaa, [Phys. Rev. D56, 55 (1997)](https://doi.org/10.1103/PhysRevD.56.55) 
